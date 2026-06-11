@@ -1,5 +1,8 @@
 # Agent Wallet Guard MCP Server
 
+<p align="center">
+  <img src="assets/logo.png" width="128" height="128" alt="Agent Wallet Guard Logo">
+</p>
 An institutional-grade Model Context Protocol (MCP) server that acts as an execution firewall for AI Agents. It provides prompt injection detection, recipient address auditing, spending limit guardrails, and EVM transaction dry-run simulations to secure autonomous wallets on the Pharos Network L1.
 
 This tool is designed to prevent AI agents from executing unauthorized transactions due to prompt injection, model hallucinations, or interacting with malicious, unverified smart contracts.
