@@ -1,0 +1,21 @@
+{
+  "name": "agent-wallet-guard",
+  "version": "1.0.0",
+  "description": "An MCP server that guards AI Agent wallets from exploits, hallucinations, and prompt injections.",
+  "main": "build/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "typescript": "^5.5.2"
+  }
+}
