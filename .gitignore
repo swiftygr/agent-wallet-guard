@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Compilation outputs
+build/
+
+# Runtime configurations and secrets
+.env
+.env*.local
+
+# Runtime state storage
+limits.json
+
+# System files
+.DS_Store
+Thumbs.db
