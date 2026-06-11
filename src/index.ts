@@ -8,6 +8,7 @@ import "dotenv/config";
 
 import { scanPrompt, auditRecipient } from "./utils/security.js";
 import { checkSpendLimit, recordSpend } from "./utils/storage.js";
+import { simulateTransaction } from "./utils/evm.js";
 import { ethers } from "ethers";
 
 const RPC_URL = process.env.RPC_URL || "https://rpc.testnet.pharosnetwork.xyz/";
@@ -80,6 +81,32 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           required: ["amount"],
         },
       },
+      {
+        name: "simulate_transaction",
+        description: "Simulates an EVM transaction on a Pharos Network fork to dry-run execution, check for reverts, verify gas requirements, and parse token transfers.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            from: {
+              type: "string",
+              description: "The sender EVM wallet address.",
+            },
+            to: {
+              type: "string",
+              description: "The target destination or contract address.",
+            },
+            value: {
+              type: "string",
+              description: "Optional native token value in Wei (as a string).",
+            },
+            data: {
+              type: "string",
+              description: "Optional hexadecimal call data payload.",
+            },
+          },
+          required: ["from", "to"],
+        },
+      },
     ],
   };
 });
@@ -132,6 +159,26 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       recordSpend(amount);
     }
 
+    return {
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(result, null, 2),
+        },
+      ],
+    };
+  }
+
+  if (name === "simulate_transaction") {
+    if (!args || typeof args.from !== "string" || typeof args.to !== "string") {
+      throw new Error("Missing from or to parameter");
+    }
+    const from = args.from;
+    const to = args.to;
+    const value = typeof args.value === "string" ? args.value : "0";
+    const data = typeof args.data === "string" ? args.data : "0x";
+
+    const result = await simulateTransaction(from, to, value, data, provider);
     return {
       content: [
         {
