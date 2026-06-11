@@ -63,7 +63,7 @@ The server is configured using environment variables. Create a `.env` file in th
 
 ```env
 # Pharos L1 Node RPC Provider URL
-RPC_URL=https://rpc.testnet.pharosnetwork.xyz/
+RPC_URL=https://atlantic.dplabs-internal.com
 
 # Maximum spend amount per day (Reset every UTC midnight)
 DAILY_LIMIT=1000
@@ -104,7 +104,7 @@ Add the following to your `claude_desktop_config.json` configuration:
       "command": "node",
       "args": ["/absolute/path/to/agent-wallet-guard/build/index.js"],
       "env": {
-        "RPC_URL": "https://rpc.testnet.pharosnetwork.xyz/",
+        "RPC_URL": "https://atlantic.dplabs-internal.com",
         "DAILY_LIMIT": "1000"
       }
     }

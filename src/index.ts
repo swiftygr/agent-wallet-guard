@@ -11,7 +11,7 @@ import { checkSpendLimit, recordSpend } from "./utils/storage.js";
 import { simulateTransaction } from "./utils/evm.js";
 import { ethers } from "ethers";
 
-const RPC_URL = process.env.RPC_URL || "https://rpc.testnet.pharosnetwork.xyz/";
+const RPC_URL = process.env.RPC_URL || "https://atlantic.dplabs-internal.com";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const DEFAULT_DAILY_LIMIT = Number(process.env.DAILY_LIMIT || "1000");
 
